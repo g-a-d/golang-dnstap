@@ -160,7 +160,7 @@ func textConvertMessage(m *Message, s *bytes.Buffer) {
 	if err != nil || len(msg.Answer) == 0 {
 		s.WriteString(" \"\"")
 	} else {
-		if t, ok := in.Answer[0].(*dns.TXT); ok {
+		if t, ok := msg.Answer[0].(*dns.TXT); ok {
 			s.WriteString(" \"" + t.Txt.String() + "\"") // write the response
 		}
 	}
