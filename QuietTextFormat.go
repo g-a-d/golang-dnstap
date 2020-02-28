@@ -157,6 +157,15 @@ func textConvertMessage(m *Message, s *bytes.Buffer) {
 		s.WriteString(dns.Type(msg.Question[0].Qtype).String())
 	}
 
+	if err != nil || len(msg.Answer) == 0 {
+		s.WriteString(" \"\"")
+	} else {
+		if t, ok := in.Answer[0].(*dns.TXT); ok {
+			s.WriteString(" \"" + t.Txt.String() + "\"") // write the response
+		}
+	}
+
+
 	s.WriteString("\n")
 }
 
